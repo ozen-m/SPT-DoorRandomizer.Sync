@@ -4,6 +4,7 @@ using Comfort.Common;
 using DoorRandomizer.Sync.Models;
 using EFT;
 using EFT.Interactive;
+using Fika.Core.Main.Utils;
 using Fika.Core.Networking;
 using Fika.Core.Networking.LiteNetLib;
 using HarmonyLib;
@@ -22,7 +23,7 @@ public class AwakePatch : ModulePatch
     [PatchPrefix]
     protected static bool Prefix(ref Dictionary<Door, EDoorState> __state)
     {
-        if (!DoorRandomizerSync.IsHost) return false;
+        if (!FikaBackendUtils.IsServer) return false;
 
         // Cache initial door states
         __state = [];
@@ -40,7 +41,7 @@ public class AwakePatch : ModulePatch
     [PatchPostfix]
     protected static void Postfix(ref Dictionary<Door, EDoorState> __state)
     {
-        if (!DoorRandomizerSync.IsHost) return;
+        if (!FikaBackendUtils.IsServer) return;
 
         // Compare new states with cached initial states
         // "OnEnable" changes the door's initial state so we have to cache
