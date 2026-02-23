@@ -48,10 +48,9 @@ public class AwakePatch : ModulePatch
         var changedDoors = new List<int>();
         foreach (var (door, initialState) in __state)
         {
-            if (door.DoorState != initialState)
-            {
-                changedDoors.Add(door.NetId);
-            }
+            if (door.DoorState == initialState) continue;
+
+            changedDoors.Add(door.NetId);
         }
 
         DoorRandomizerSync.LogSource.LogInfo($"Sending packet to sync {changedDoors.Count} doors");
