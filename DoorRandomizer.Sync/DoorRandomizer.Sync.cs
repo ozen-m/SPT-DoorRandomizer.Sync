@@ -13,8 +13,8 @@ using HarmonyLib;
 
 namespace DoorRandomizer.Sync;
 
-[BepInPlugin("com.ozen.doorrandomizer.sync", "DoorRandomizer.Sync", "1.0.1")]
-[BepInDependency("com.fika.core", "2.2.3")]
+[BepInPlugin("com.ozen.doorrandomizer.sync", "DoorRandomizer.Sync", "1.0.2")]
+[BepInDependency("com.fika.core", "2.2.4")]
 [BepInDependency("xyz.drakia.doorrandomizer", "1.7.0")]
 public class DoorRandomizerSync : BaseUnityPlugin
 {
