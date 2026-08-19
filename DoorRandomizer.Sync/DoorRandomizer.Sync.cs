@@ -9,19 +9,15 @@ using EFT.Interactive;
 using Fika.Core.Modding;
 using Fika.Core.Modding.Events;
 using Fika.Core.Networking;
-using HarmonyLib;
 
 namespace DoorRandomizer.Sync;
 
-[BepInPlugin("com.ozen.doorrandomizer.sync", "DoorRandomizer.Sync", "1.0.2")]
-[BepInDependency("com.fika.core", "2.2.4")]
-[BepInDependency("xyz.drakia.doorrandomizer", "1.7.0")]
+[BepInPlugin("com.ozen.doorrandomizer.sync", "DoorRandomizer.Sync", "1.1.0")]
+[BepInDependency("com.fika.core", "2.4.1")]
+[BepInDependency("xyz.drakia.doorrandomizer", "1.8.0")]
 public class DoorRandomizerSync : BaseUnityPlugin
 {
     internal static ManualLogSource LogSource;
-
-    internal static readonly AccessTools.FieldRef<World, WorldInteractiveObject[]> InteractiveObjectsField =
-        AccessTools.FieldRefAccess<World, WorldInteractiveObject[]>("worldInteractiveObject_0");
 
     protected void Awake()
     {
@@ -47,7 +43,7 @@ public class DoorRandomizerSync : BaseUnityPlugin
         LogSource.LogInfo($"Received packet to sync {packet.NetIds.Length} doors");
 
         var changedDoorIds = new HashSet<int>(packet.NetIds);
-        foreach (var interactiveObject in InteractiveObjectsField(Singleton<GameWorld>.Instance.World_0))
+        foreach (var interactiveObject in Singleton<GameWorld>.Instance.WorldInteractiveObjects())
         {
             if (!changedDoorIds.Contains(interactiveObject.NetId)) continue;
 

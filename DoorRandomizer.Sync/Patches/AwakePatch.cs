@@ -27,7 +27,7 @@ public class AwakePatch : ModulePatch
 
         // Cache initial door states
         __state = [];
-        var interactiveObjects = DoorRandomizerSync.InteractiveObjectsField(Singleton<GameWorld>.Instance.World_0);
+        var interactiveObjects = Singleton<GameWorld>.Instance.World.WorldInteractiveObjects();
         foreach (var interactiveObject in interactiveObjects)
         {
             if (interactiveObject is not Door door) continue;
